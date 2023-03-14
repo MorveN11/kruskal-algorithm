@@ -1,4 +1,4 @@
-package salesiana.apr211.graphs;
+package io.github.MorveN11.graphs;
 
 /**
  * This is Edge class T extends -> Comparable T
@@ -16,10 +16,9 @@ public class Edge<T extends Comparable<T>> implements Comparable<Edge<T>> {
    * This is the constructor for Edge class.
    * Source -> Destination | Weight.
    *
-   * @param weight the weight of the Edge.
-   * @param source the source of the Edge.
+   * @param weight      the weight of the Edge.
+   * @param source      the source of the Edge.
    * @param destination the destination of the Edge.
-   * 
    */
   public Edge(Integer weight, Node<T> source, Node<T> destination) {
     this.weight = weight;
@@ -46,7 +45,7 @@ public class Edge<T extends Comparable<T>> implements Comparable<Edge<T>> {
   @Override
   public String toString() {
     return this.source.toString() + " -> "
-        + this.destination.toString() + " | " + "weight: " + this.weight;
+            + this.destination.toString() + " | " + "weight: " + this.weight;
   }
 
   @Override
@@ -62,7 +61,7 @@ public class Edge<T extends Comparable<T>> implements Comparable<Edge<T>> {
     }
     Edge<?> obj = (Edge<?>) object;
     return this.source.equals(obj.getSource()) && this.destination.equals(obj.getDestination())
-        && this.weight.equals(obj.getWeight());
+            && this.weight.equals(obj.getWeight());
   }
 
   @Override
@@ -73,7 +72,7 @@ public class Edge<T extends Comparable<T>> implements Comparable<Edge<T>> {
   @Override
   public int compareTo(Edge<T> o) {
     if (!this.weight.equals(o.getWeight()) && this.source == o.getSource()
-        && this.destination == o.getDestination()) {
+            && this.destination == o.getDestination()) {
       return 0;
     }
     if (!this.weight.equals(o.getWeight())) {

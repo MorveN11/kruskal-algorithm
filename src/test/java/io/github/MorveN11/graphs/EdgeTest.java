@@ -1,4 +1,4 @@
-package salesiana.apr211.graphs;
+package io.github.MorveN11.graphs;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class EdgeTest {
+
   private static Edge<String> edge;
 
   @BeforeEach

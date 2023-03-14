@@ -1,6 +1,6 @@
-package salesiana.apr211.algorithm;
+package io.github.MorveN11.algorithm;
 
-import salesiana.apr211.graphs.Node;
+import io.github.MorveN11.graphs.Node;
 
 /**
  * This is Subset Class, This class has the Parent and Rank of a Node.

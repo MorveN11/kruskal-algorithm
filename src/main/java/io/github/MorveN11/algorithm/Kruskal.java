@@ -1,14 +1,14 @@
-package salesiana.apr211.algorithm;
+package io.github.MorveN11.algorithm;
 
+import io.github.MorveN11.graphs.DirectedGraph;
+import io.github.MorveN11.graphs.Edge;
+import io.github.MorveN11.graphs.Graph;
+import io.github.MorveN11.graphs.Node;
+import io.github.MorveN11.graphs.UndirectedGraph;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
-import salesiana.apr211.graphs.DirectedGraph;
-import salesiana.apr211.graphs.Edge;
-import salesiana.apr211.graphs.Graph;
-import salesiana.apr211.graphs.Node;
-import salesiana.apr211.graphs.UndirectedGraph;
 
 /**
  * This is Kruskal class T extends comparable T.
@@ -16,6 +16,7 @@ import salesiana.apr211.graphs.UndirectedGraph;
  * @param <T> T is the Generic Parameter.
  */
 public class Kruskal<T extends Comparable<T>> {
+
   private final Graph<T> graph;
   private Map<Node<T>, Subset<T>> subset;
   private Integer minimumCost;

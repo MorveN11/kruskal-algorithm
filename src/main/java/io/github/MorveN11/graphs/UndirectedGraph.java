@@ -1,4 +1,4 @@
-package salesiana.apr211.graphs;
+package io.github.MorveN11.graphs;
 
 import java.util.Set;
 
@@ -19,7 +19,7 @@ public class UndirectedGraph<T extends Comparable<T>> extends Graph<T> {
     addNode(source);
     addNode(destination);
     if (!addEdgeFromTo(weight, source, destination)
-        || !addEdgeFromTo(weight, destination, source)) {
+            || !addEdgeFromTo(weight, destination, source)) {
       return false;
     }
     super.increaseNumEdges();

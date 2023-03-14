@@ -1,8 +1,10 @@
 plugins {
     id 'java-library'
+    id 'maven-publish'
+    id 'signing'
 }
 
-group 'salesiana.apr211'
+group 'io.github.MorveN11'
 version '1.0'
 
 repositories {
@@ -14,6 +16,68 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
 
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
 test {
     useJUnitPlatform()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = 'io.github.MorveN11'
+            artifactId = 'kruskal-algorithm'
+            version = '1.0'
+            from components.java
+
+            pom {
+                name = 'kruskal-algorithm'
+                description = 'Open-Source Graph and Kruskal Library'
+                url = 'https://github.com/MorveN11/Kruskal-algorithm'
+                inceptionYear = '2023'
+
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'http://www.opensource.org/licenses/mit-license.php'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'MorveN11'
+                        name = 'Manuel Morales'
+                        email = 'morales.patty.jose@gmail.com'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git:github.com/MorveN11/Kruskal-algorithm.git'
+                    developerConnection = 'scm:git:ssh://github.com/MorveN11/Kruskal-algorithm.git'
+                    url = 'https://github.com/MorveN11/Kruskal-algorithm'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = 'OSSRH'
+            url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
+            credentials {
+                username = project.properties["ossrhUsername"]
+                password = project.properties["ossrhPassword"]
+            }
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.mavenJava
+}
+
+javadoc {
+    if (JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
 }
