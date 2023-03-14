@@ -1,4 +1,4 @@
-package salesiana.apr211.graphs;
+package io.github.morven11.graphs;
 
 /**
  * This is Edge class T extends -> Comparable T

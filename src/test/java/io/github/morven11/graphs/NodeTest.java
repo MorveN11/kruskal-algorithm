@@ -1,4 +1,4 @@
-package salesiana.apr211.graphs;
+package io.github.morven11.graphs;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

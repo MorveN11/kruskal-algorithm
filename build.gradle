@@ -4,7 +4,7 @@ plugins {
     id 'signing'
 }
 
-group 'salesiana.apr211'
+group 'io.github.morven11'
 version '1.0'
 
 repositories {
@@ -38,7 +38,6 @@ publishing {
                 description = 'Open-Source Graph and Kruskal Library'
                 url = 'https://github.com/MorveN11/Kruskal-algorithm'
                 inceptionYear = '2023'
-
                 licenses {
                     license {
                         name = 'MIT License'

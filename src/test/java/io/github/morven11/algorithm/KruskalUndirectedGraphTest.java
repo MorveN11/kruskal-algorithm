@@ -1,16 +1,16 @@
-package salesiana.apr211.algorithm;
+package io.github.morven11.algorithm;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import io.github.morven11.graphs.Edge;
+import io.github.morven11.graphs.Graph;
+import io.github.morven11.graphs.Node;
+import io.github.morven11.graphs.UndirectedGraph;
 import java.util.Set;
 import java.util.TreeSet;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import salesiana.apr211.graphs.Edge;
-import salesiana.apr211.graphs.Graph;
-import salesiana.apr211.graphs.Node;
-import salesiana.apr211.graphs.UndirectedGraph;
 
 class KruskalUndirectedGraphTest {
 
