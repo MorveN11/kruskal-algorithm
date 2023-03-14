@@ -4,7 +4,7 @@ plugins {
     id 'signing'
 }
 
-group 'io.github.MorveN11'
+group 'salesiana.apr211'
 version '1.0'
 
 repositories {

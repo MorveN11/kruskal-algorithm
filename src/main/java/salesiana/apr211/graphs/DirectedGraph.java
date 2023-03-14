@@ -1,4 +1,4 @@
-package io.github.MorveN11.graphs;
+package salesiana.apr211.graphs;
 
 import java.util.Set;
 

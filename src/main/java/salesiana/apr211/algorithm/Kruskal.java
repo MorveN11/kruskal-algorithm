@@ -1,14 +1,14 @@
-package io.github.MorveN11.algorithm;
+package salesiana.apr211.algorithm;
 
-import io.github.MorveN11.graphs.DirectedGraph;
-import io.github.MorveN11.graphs.Edge;
-import io.github.MorveN11.graphs.Graph;
-import io.github.MorveN11.graphs.Node;
-import io.github.MorveN11.graphs.UndirectedGraph;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import salesiana.apr211.graphs.DirectedGraph;
+import salesiana.apr211.graphs.Edge;
+import salesiana.apr211.graphs.Graph;
+import salesiana.apr211.graphs.Node;
+import salesiana.apr211.graphs.UndirectedGraph;
 
 /**
  * This is Kruskal class T extends comparable T.
