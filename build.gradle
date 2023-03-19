@@ -32,7 +32,14 @@ publishing {
             artifactId = 'kruskal-algorithm'
             version = '1.0'
             from components.java
-
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
             pom {
                 name = 'kruskal-algorithm'
                 description = 'Open-Source Graph and Kruskal Library'
@@ -52,7 +59,7 @@ publishing {
                     }
                 }
                 scm {
-                    connection = 'scm:git:git:github.com/MorveN11/Kruskal-algorithm.git'
+                    connection = 'scm:git:git://github.com/MorveN11/Kruskal-algorithm.git'
                     developerConnection = 'scm:git:ssh://github.com/MorveN11/Kruskal-algorithm.git'
                     url = 'https://github.com/MorveN11/Kruskal-algorithm'
                 }
@@ -62,7 +69,7 @@ publishing {
     repositories {
         maven {
             name = 'OSSRH'
-            url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
+            url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2'
             credentials {
                 username = project.properties["ossrhUsername"]
                 password = project.properties["ossrhPassword"]
