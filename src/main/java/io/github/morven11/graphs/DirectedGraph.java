@@ -54,4 +54,27 @@ public class DirectedGraph<T extends Comparable<T>> extends Graph<T> {
     }
     return false;
   }
+
+  @Override
+  public boolean removeNode(Node<T> node) {
+    if (!super.containsNode(node)) {
+      return false;
+    }
+    int count = 0;
+    for (Node<T> source : super.getAllNodes()) {
+      if (source.equals(node)) {
+        continue;
+      }
+      Set<Edge<T>> edges = super.getEdgesNode(source);
+      boolean result = edges.removeIf(e -> e.getDestination().equals(node));
+      if (result) {
+        count++;
+      }
+    }
+    count += super.getEdgesNode(node).size();
+    super.getAdjSets().remove(node);
+    super.decreaseAnAmountNumEdges(count);
+    super.decreaseNumNodes();
+    return true;
+  }
 }

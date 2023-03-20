@@ -23,7 +23,6 @@ public class UndirectedGraph<T extends Comparable<T>> extends Graph<T> {
       return false;
     }
     super.increaseNumEdges();
-    super.increaseNumEdges();
     return true;
   }
 
@@ -38,14 +37,13 @@ public class UndirectedGraph<T extends Comparable<T>> extends Graph<T> {
       boolean containsE1 = edges.stream().anyMatch(e -> e.equals(e1));
       if (!result1 && containsE1) {
         result1 = edges.removeIf(e -> e.equals(e1));
-        super.decreaseNumEdges();
       }
       boolean containsE2 = edges.stream().anyMatch(e -> e.equals(e2));
       if (!result2 && containsE2) {
         result2 = edges.removeIf(e -> e.equals(e2));
-        super.decreaseNumEdges();
       }
       if (result1 && result2) {
+        super.decreaseNumEdges();
         return true;
       }
     }
@@ -75,5 +73,31 @@ public class UndirectedGraph<T extends Comparable<T>> extends Graph<T> {
       }
     }
     return false;
+  }
+
+  @Override
+  public boolean removeNode(Node<T> node) {
+    if (!super.containsNode(node)) {
+      return false;
+    }
+    int count = 0;
+    for (Node<T> source : super.getAllNodes()) {
+      if (!source.equals(node)) {
+        continue;
+      }
+      Set<Edge<T>> edges = this.getEdgesNode(source);
+      count = edges.size();
+      for (Edge<T> edge : edges) {
+        Integer weight = edge.getWeight();
+        Node<T> destination = edge.getDestination();
+        Edge<T> imageEdge = new Edge<>(weight, destination, source);
+        super.getEdgesNode(destination).remove(imageEdge);
+        super.getAdjSets().get(destination).remove(imageEdge);
+      }
+    }
+    super.getAdjSets().remove(node);
+    super.decreaseAnAmountNumEdges(count);
+    super.decreaseNumNodes();
+    return true;
   }
 }

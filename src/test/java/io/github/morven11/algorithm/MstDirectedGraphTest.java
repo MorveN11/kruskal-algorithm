@@ -3,16 +3,13 @@ package io.github.morven11.algorithm;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import io.github.morven11.graphs.Edge;
+import io.github.morven11.graphs.DirectedGraph;
 import io.github.morven11.graphs.Graph;
 import io.github.morven11.graphs.Node;
-import io.github.morven11.graphs.UndirectedGraph;
-import java.util.Set;
-import java.util.TreeSet;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class KruskalUndirectedGraphTest {
+class MstDirectedGraphTest {
 
   private static final Node<Integer> node1 = new Node<>(1);
   private static final Node<Integer> node2 = new Node<>(2);
@@ -24,7 +21,7 @@ class KruskalUndirectedGraphTest {
 
   @BeforeEach
   void setup() {
-    graph = new UndirectedGraph<>();
+    graph = new DirectedGraph<>();
     assertTrue(graph.addEdge(3, node1, node2));
     assertTrue(graph.addEdge(5, node1, node5));
     assertTrue(graph.addEdge(2, node5, node6));
@@ -37,18 +34,18 @@ class KruskalUndirectedGraphTest {
 
   @Test
   void testKruskalAlgorithm() {
-    Set<Edge<Integer>> expectedGraph = new TreeSet<>();
-    expectedGraph.add(new Edge<>(2, node5, node6));
-    expectedGraph.add(new Edge<>(3, node1, node2));
-    expectedGraph.add(new Edge<>(3, node3, node6));
-    expectedGraph.add(new Edge<>(5, node1, node5));
-    expectedGraph.add(new Edge<>(7, node4, node6));
+    Graph<Integer> expectedGraph = new DirectedGraph<>();
+    expectedGraph.addEdge(2, node5, node6);
+    expectedGraph.addEdge(3, node1, node2);
+    expectedGraph.addEdge(3, node3, node6);
+    expectedGraph.addEdge(5, node1, node5);
+    expectedGraph.addEdge(7, node6, node4);
     assertEquals(6, graph.getNumNodes());
-    assertEquals(16, graph.getNumEdges());
-    Kruskal<Integer> kruskal = new Kruskal<>(graph);
-    assertEquals(6, kruskal.getGraph().getNumNodes());
-    assertEquals(5, kruskal.getGraph().getNumEdges());
-    assertEquals(20, kruskal.getMinimumCost());
-    assertEquals(expectedGraph, kruskal.getGraph().getAllEdges());
+    assertEquals(8, graph.getNumEdges());
+    Mst<Integer> mst = new Mst<>(graph);
+    assertEquals(6, mst.getGraph().getNumNodes());
+    assertEquals(5, mst.getGraph().getNumEdges());
+    assertEquals(20, mst.getMinimumCost());
+    assertEquals(expectedGraph, mst.getGraph());
   }
 }

@@ -15,10 +15,10 @@ import java.util.TreeSet;
  *
  * @param <T> T is the Generic Parameter.
  */
-public class Kruskal<T extends Comparable<T>> {
+public class Mst<T extends Comparable<T>> {
 
   private final Graph<T> graph;
-  private Map<Node<T>, Subset<T>> subset;
+  private Map<Node<T>, Subset<T>> subsets;
   private Integer minimumCost;
 
   /**
@@ -26,10 +26,10 @@ public class Kruskal<T extends Comparable<T>> {
    *
    * @param graph The graph to convert into a minimum Spanning Tree.
    */
-  public Kruskal(Graph<T> graph) {
-    this.subset = new TreeMap<>();
+  public Mst(Graph<T> graph) {
+    this.subsets = new TreeMap<>();
     this.minimumCost = 0;
-    this.graph = getMinimumSpanningTree(graph);
+    this.graph = kruskal(graph);
   }
 
   public Integer getMinimumCost() {
@@ -59,48 +59,49 @@ public class Kruskal<T extends Comparable<T>> {
   }
 
   private Map<Node<T>, Subset<T>> fillSubset(Graph<T> graph) {
-    Map<Node<T>, Subset<T>> subset = new TreeMap<>();
+    Map<Node<T>, Subset<T>> tmpSubsets = new TreeMap<>();
     for (Node<T> node : graph.getAllNodes()) {
-      subset.put(node, new Subset<>(node));
+      tmpSubsets.put(node, new Subset<>(node, 0));
     }
-    return subset;
+    return tmpSubsets;
   }
 
   private Node<T> find(Node<T> node) {
-    if (subset.get(node).getParent() == node) {
+    if (subsets.get(node).getParent() == node) {
       return node;
     }
-    return find(subset.get(node).getParent());
+    return find(subsets.get(node).getParent());
   }
 
   private void union(Node<T> source, Node<T> destination) {
     Node<T> rootSource = find(source);
     Node<T> rootDestination = find(destination);
-    if (subset.get(rootSource).getRank() < subset.get(rootDestination).getRank()) {
-      subset.get(rootSource).setParent(rootDestination);
-    } else if (subset.get(rootSource).getRank() > subset.get(rootDestination).getRank()) {
-      subset.get(rootDestination).setParent(rootSource);
+    if (subsets.get(rootSource).getRank() < subsets.get(rootDestination).getRank()) {
+      subsets.get(rootSource).setParent(rootDestination);
+    } else if (subsets.get(rootSource).getRank() > subsets.get(rootDestination).getRank()) {
+      subsets.get(rootDestination).setParent(rootSource);
     } else {
-      subset.get(rootDestination).setParent(rootSource);
-      subset.get(rootSource).increaseRank();
+      subsets.get(rootDestination).setParent(rootSource);
+      subsets.get(rootSource).increaseRank();
     }
   }
 
-  private Graph<T> getMinimumSpanningTree(Graph<T> graphToConvert) {
-    Graph<T> minimumSpanningTree = new DirectedGraph<>();
-    Graph<T> graph = graphToConvert instanceof UndirectedGraph<T>
+  private Graph<T> kruskal(Graph<T> graphToConvert) {
+    Graph<T> mst = graphToConvert instanceof UndirectedGraph<T>
+            ? new UndirectedGraph<>() : new DirectedGraph<>();
+    Graph<T> cleanGraph = graphToConvert instanceof UndirectedGraph<T>
             ? cleanGraph(graphToConvert) : graphToConvert;
-    subset = fillSubset(graph);
-    for (Edge<T> edge : graph.getAllEdges()) {
+    subsets = fillSubset(cleanGraph);
+    for (Edge<T> edge : cleanGraph.getAllEdges()) {
       Node<T> source = find(edge.getSource());
       Node<T> destination = find(edge.getDestination());
       if (!source.equals(destination)) {
-        minimumSpanningTree.addEdge(edge.getWeight(), edge.getSource(), edge.getDestination());
+        mst.addEdge(edge.getWeight(), edge.getSource(), edge.getDestination());
         union(source, destination);
         this.minimumCost += edge.getWeight();
       }
-      if (minimumSpanningTree.getNumEdges() == graph.getNumNodes() - 1) {
-        return minimumSpanningTree;
+      if (mst.getNumEdges() == cleanGraph.getNumNodes() - 1) {
+        return mst;
       }
     }
     return null;
@@ -108,11 +109,7 @@ public class Kruskal<T extends Comparable<T>> {
 
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder();
-    for (Edge<T> edge : graph.getAllEdges()) {
-      sb.append(edge).append("\n");
-    }
-    sb.append("Minimum Cost: ").append(this.getMinimumCost());
-    return sb.toString();
+    return this.graph.toString()
+            + "Minimum Cost: " + this.getMinimumCost();
   }
 }

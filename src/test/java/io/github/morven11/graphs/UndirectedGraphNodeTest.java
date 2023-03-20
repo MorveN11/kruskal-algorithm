@@ -34,7 +34,7 @@ class UndirectedGraphNodeTest {
     assertTrue(graph.addEdge(1, c, f));
     assertTrue(graph.addEdge(1, f, e));
     expectedNumberOfNodes = 6;
-    expectedNumberOfEdges = 16;
+    expectedNumberOfEdges = 8;
   }
 
   @Test
@@ -62,7 +62,7 @@ class UndirectedGraphNodeTest {
     assertEquals("A", beforeRemoveNode.getElement());
     assertTrue(graph.removeNode(a));
     expectedNumberOfNodes--;
-    expectedNumberOfEdges -= 4;
+    expectedNumberOfEdges -= 2;
     Node<String> afterRemoveNode = graph.getNode("A");
     assertNull(afterRemoveNode);
     Set<Edge<String>> allEdgesGraph = graph.getAllEdges();

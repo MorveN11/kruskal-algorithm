@@ -31,7 +31,7 @@ class UndirectedGraphEdgeTest {
     assertTrue(graph.addEdge(1, c, f));
     assertTrue(graph.addEdge(1, f, e));
     expectedNumberOfNodes = 6;
-    expectedNumberOfEdges = 16;
+    expectedNumberOfEdges = 8;
   }
 
   @Test
@@ -49,7 +49,7 @@ class UndirectedGraphEdgeTest {
     assertNull(beforeAddEdge2);
     assertTrue(graph.addEdge(4, o, p));
     expectedNumberOfNodes += 2;
-    expectedNumberOfEdges += 2;
+    expectedNumberOfEdges++;
     Edge<String> afterAddEdge1 = graph.getEdge(4, o, p);
     Edge<String> afterAddEdge2 = graph.getEdge(4, p, o);
     assertEquals("O -> P | weight: 4", afterAddEdge1.toString());
@@ -67,7 +67,7 @@ class UndirectedGraphEdgeTest {
     assertEquals("A -> B | weight: 1", beforeRemoveEdge1.toString());
     assertEquals("B -> A | weight: 1", beforeRemoveEdge2.toString());
     assertTrue(graph.removeEdge(1, a, b));
-    expectedNumberOfEdges -= 2;
+    expectedNumberOfEdges--;
     Edge<String> afterRemoveEdge1 = graph.getEdge(1, a, b);
     Edge<String> afterRemoveEdge2 = graph.getEdge(1, b, a);
     assertNull(afterRemoveEdge1);

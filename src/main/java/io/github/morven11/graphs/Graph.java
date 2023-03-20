@@ -22,6 +22,10 @@ public abstract class Graph<T extends Comparable<T>> {
     numNodes = 0;
   }
 
+  public Map<Node<T>, Set<Edge<T>>> getAdjSets() {
+    return this.adjSets;
+  }
+
   public Integer getNumNodes() {
     return this.numNodes;
   }
@@ -30,23 +34,23 @@ public abstract class Graph<T extends Comparable<T>> {
     return this.numEdges;
   }
 
-  public void increaseNumNodes() {
+  private void increaseNumNodes() {
     this.numNodes++;
   }
 
-  public void decreaseNumNodes() {
+  protected void decreaseNumNodes() {
     this.numNodes--;
   }
 
-  public void increaseNumEdges() {
+  protected void increaseNumEdges() {
     this.numEdges++;
   }
 
-  public void decreaseNumEdges() {
+  protected void decreaseNumEdges() {
     this.numEdges--;
   }
 
-  public void decreaseAnAmountNumEdges(int num) {
+  protected void decreaseAnAmountNumEdges(int num) {
     this.numEdges -= num;
   }
 
@@ -98,28 +102,7 @@ public abstract class Graph<T extends Comparable<T>> {
     return true;
   }
 
-  /**
-   * This method remove if exists a Node into the Adjacency Set.
-   *
-   * @param node The node to remove.
-   * @return True if the method can remove the Node and False when not.
-   */
-  public boolean removeNode(Node<T> node) {
-    for (Set<Edge<T>> edges : this.adjSets.values()) {
-      int count = this.adjSets.get(node).equals(edges)
-              ? (int) edges.stream().filter(e -> e.getSource()
-              .equals(node) || e.getDestination().equals(node)).count()
-              : 1;
-      boolean result = edges.removeIf(e -> e.getSource().equals(node)
-              || e.getDestination().equals(node));
-      if (result) {
-        this.decreaseAnAmountNumEdges(count);
-      }
-    }
-    this.adjSets.remove(node);
-    this.decreaseNumNodes();
-    return true;
-  }
+  public abstract boolean removeNode(Node<T> node);
 
   /**
    * This method update the T element in a Node.
@@ -174,7 +157,7 @@ public abstract class Graph<T extends Comparable<T>> {
    * @param destination The destination of the Edge.
    * @return True if the method can add the Edge and False when not.
    */
-  public boolean addEdgeFromTo(Integer weight, Node<T> source, Node<T> destination) {
+  protected boolean addEdgeFromTo(Integer weight, Node<T> source, Node<T> destination) {
     Edge<T> newEdge = new Edge<>(weight, source, destination);
     Set<Edge<T>> sourceEdges = this.getEdgesNode(source);
     boolean containsEdge = sourceEdges.stream().anyMatch(e -> e.equals(newEdge));
@@ -197,5 +180,25 @@ public abstract class Graph<T extends Comparable<T>> {
       sb.append(" }\n");
     }
     return sb.toString();
+  }
+
+  @Override
+  public boolean equals(Object object) {
+    if (object == null) {
+      return false;
+    }
+    if (this.getClass() != object.getClass()) {
+      return false;
+    }
+    if (object == this) {
+      return true;
+    }
+    Graph<?> obj = (Graph<?>) object;
+    return this.getAllEdges().equals(obj.getAllEdges());
+  }
+
+  @Override
+  public int hashCode() {
+    return this.adjSets.hashCode();
   }
 }

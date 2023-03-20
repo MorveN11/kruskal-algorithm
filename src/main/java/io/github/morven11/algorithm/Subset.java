@@ -12,9 +12,9 @@ public class Subset<T extends Comparable<T>> {
   private Node<T> parent;
   private Integer rank;
 
-  public Subset(Node<T> parent) {
+  public Subset(Node<T> parent, Integer rank) {
     this.parent = parent;
-    this.rank = 0;
+    this.rank = rank;
   }
 
   public Node<T> getParent() {
@@ -29,7 +29,7 @@ public class Subset<T extends Comparable<T>> {
     return this.rank;
   }
 
-  public void increaseRank() {
+  protected void increaseRank() {
     this.rank++;
   }
 }

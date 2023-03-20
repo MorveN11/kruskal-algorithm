@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'io.github.morven11'
-version '1.1'
+version '1.2'
 
 repositories {
     mavenCentral()
@@ -30,7 +30,7 @@ publishing {
         mavenJava(MavenPublication) {
             groupId = 'io.github.morven11'
             artifactId = 'kruskal-algorithm'
-            version = '1.1'
+            version = '1.2'
             from components.java
             pom {
                 name = 'kruskal-algorithm'
