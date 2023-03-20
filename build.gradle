@@ -28,18 +28,10 @@ test {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            groupId = 'io.github.MorveN11'
+            groupId = 'io.github.morven11'
             artifactId = 'kruskal-algorithm'
             version = '1.0'
             from components.java
-            versionMapping {
-                usage('java-api') {
-                    fromResolutionOf('runtimeClasspath')
-                }
-                usage('java-runtime') {
-                    fromResolutionResult()
-                }
-            }
             pom {
                 name = 'kruskal-algorithm'
                 description = 'Open-Source Graph and Kruskal Library'
