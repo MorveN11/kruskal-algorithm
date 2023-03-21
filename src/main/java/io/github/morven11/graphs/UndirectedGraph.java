@@ -10,6 +10,9 @@ import java.util.Set;
  */
 public class UndirectedGraph<T extends Comparable<T>> extends Graph<T> {
 
+  /**
+   * This is the constructor of the UndirectedGraph.
+   */
   public UndirectedGraph() {
     super();
   }

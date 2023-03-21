@@ -10,14 +10,29 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
 
   private T element;
 
+  /**
+   * This is the constructor of the Node class.
+   *
+   * @param element The element of the node.
+   */
   public Node(T element) {
     this.element = element;
   }
 
+  /**
+   * This method gives de element of the Node.
+   *
+   * @return The element.
+   */
   public T getElement() {
     return this.element;
   }
 
+  /**
+   * This method update the element of the Node.
+   *
+   * @param element The new Element of the node.
+   */
   public void setElement(T element) {
     this.element = element;
   }

@@ -32,10 +32,20 @@ public class Mst<T extends Comparable<T>> {
     this.graph = kruskal(graph);
   }
 
+  /**
+   * This class gives the cost of the Spanning Tree.
+   *
+   * @return The minimum cost of the Spanning Tree.
+   */
   public Integer getMinimumCost() {
     return minimumCost;
   }
 
+  /**
+   * This method gives the graph of the MST.
+   *
+   * @return The Graph.
+   */
   public Graph<T> getGraph() {
     return this.graph;
   }

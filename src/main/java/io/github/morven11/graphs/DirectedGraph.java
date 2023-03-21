@@ -10,6 +10,9 @@ import java.util.Set;
  */
 public class DirectedGraph<T extends Comparable<T>> extends Graph<T> {
 
+  /**
+   * This is the constructor of the DirectedGraph.
+   */
   public DirectedGraph() {
     super();
   }

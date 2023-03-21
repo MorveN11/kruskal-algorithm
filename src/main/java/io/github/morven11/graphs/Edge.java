@@ -26,18 +26,38 @@ public class Edge<T extends Comparable<T>> implements Comparable<Edge<T>> {
     this.destination = destination;
   }
 
+  /**
+   * This method gives the weight of the Edge.
+   *
+   * @return The Weight.
+   */
   public Integer getWeight() {
     return weight;
   }
 
+  /**
+   * This method update the weight of the Edge.
+   *
+   * @param weight The new Weight of the Edge.
+   */
   public void setWeight(Integer weight) {
     this.weight = weight;
   }
 
+  /**
+   * This method gives the destination of the Edge.
+   *
+   * @return The Destination.
+   */
   public Node<T> getDestination() {
     return destination;
   }
 
+  /**
+   * This method gives the source of the Edge.
+   *
+   * @return The source.
+   */
   public Node<T> getSource() {
     return source;
   }

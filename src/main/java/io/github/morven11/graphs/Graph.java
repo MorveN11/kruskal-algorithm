@@ -16,20 +16,39 @@ public abstract class Graph<T extends Comparable<T>> {
   private Integer numEdges;
   private Integer numNodes;
 
+  /**
+   * This is the constructor of the Graph class.
+   * Initialize the map and the num of nodes and edges.
+   */
   protected Graph() {
     adjSets = new TreeMap<>();
     numEdges = 0;
     numNodes = 0;
   }
 
+  /**
+   * This method gives the Adjacency Set of the Graph.
+   *
+   * @return The Adjacency Set.
+   */
   public Map<Node<T>, Set<Edge<T>>> getAdjSets() {
     return this.adjSets;
   }
 
+  /**
+   * This method gives the Number of Nodes in the graph.
+   *
+   * @return The Number of Nodes.
+   */
   public Integer getNumNodes() {
     return this.numNodes;
   }
 
+  /**
+   * This method gives the number of Edges in the Graph.
+   *
+   * @return The number of Edges.
+   */
   public Integer getNumEdges() {
     return this.numEdges;
   }
@@ -38,18 +57,32 @@ public abstract class Graph<T extends Comparable<T>> {
     this.numNodes++;
   }
 
+  /**
+   * This method decrease in one the number of nodes in the Graph.
+   */
   protected void decreaseNumNodes() {
     this.numNodes--;
   }
 
+  /**
+   * This method increase in one the number of nodes in the Graph.
+   */
   protected void increaseNumEdges() {
     this.numEdges++;
   }
 
+  /**
+   * This method decrease in one the number of edges in the Graph.
+   */
   protected void decreaseNumEdges() {
     this.numEdges--;
   }
 
+  /**
+   * This method decease a give number of Edges in the Graph.
+   *
+   * @param num The number to decrease.
+   */
   protected void decreaseAnAmountNumEdges(int num) {
     this.numEdges -= num;
   }
@@ -69,18 +102,41 @@ public abstract class Graph<T extends Comparable<T>> {
     return allEdges;
   }
 
+  /**
+   * This method gives all nodes in the Graph.
+   *
+   * @return The nodes.
+   */
   public Set<Node<T>> getAllNodes() {
     return adjSets.keySet();
   }
 
+  /**
+   * This method verify if a node exists or not in the Graph.
+   *
+   * @param node The node to search.
+   * @return True if the Graph contains the node and False when not.
+   */
   public boolean containsNode(Node<T> node) {
     return adjSets.containsKey(node);
   }
 
+  /**
+   * This method gives all the Edges of a source Node.
+   *
+   * @param node The source Node.
+   * @return The Edges.
+   */
   public Set<Edge<T>> getEdgesNode(Node<T> node) {
     return adjSets.get(node);
   }
 
+  /**
+   * This method gives a Node of the Graph.
+   *
+   * @param node The element of the node to Search.
+   * @return The node.
+   */
   public Node<T> getNode(T node) {
     Node<T> nodeToFind = new Node<>(node);
     return this.getAllNodes().stream().filter(n -> n.equals(nodeToFind)).findFirst().orElse(null);
@@ -102,6 +158,12 @@ public abstract class Graph<T extends Comparable<T>> {
     return true;
   }
 
+  /**
+   * This method remove a Node of the Graph.
+   *
+   * @param node The node to Remove.
+   * @return True if the method can remove the node and False when not.
+   */
   public abstract boolean removeNode(Node<T> node);
 
   /**
@@ -142,10 +204,35 @@ public abstract class Graph<T extends Comparable<T>> {
     return sourceEdges.stream().filter(e -> e.equals(edge)).findFirst().orElse(null);
   }
 
+  /**
+   * This method add an Edge in the graph.
+   *
+   * @param weight      The weight of the Edge.
+   * @param source      The source of the Edge.
+   * @param destination The destination of the Edge.
+   * @return True if the method can Add the Edge and False when not.
+   */
   public abstract boolean addEdge(Integer weight, Node<T> source, Node<T> destination);
 
+  /**
+   * This method remove an Edge og the Graph.
+   *
+   * @param weight      The weight of the Edge.
+   * @param source      The source of the Edge.
+   * @param destination The destination of the Edge.
+   * @return True if the method can remove the Edge and False when not.
+   */
   public abstract boolean removeEdge(Integer weight, Node<T> source, Node<T> destination);
 
+  /**
+   * This method update and Edge of the Graph.
+   *
+   * @param weight      The weight of the Edge.
+   * @param source      The source of the Edge.
+   * @param destination The destination of the Edge.
+   * @param newWeight   The New Weight of the Edge.
+   * @return True if the method can update the Edge and False when not.
+   */
   public abstract boolean updateEdge(Integer weight,
                                      Node<T> source, Node<T> destination, int newWeight);
 
