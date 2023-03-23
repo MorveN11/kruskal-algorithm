@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import io.github.morven11.graphs.DirectedGraph;
 import io.github.morven11.graphs.Graph;
 import io.github.morven11.graphs.Node;
+import io.github.morven11.graphs.UndirectedGraph;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -34,12 +35,12 @@ class MstDirectedGraphTest {
 
   @Test
   void testKruskalAlgorithm() {
-    Graph<Integer> expectedGraph = new DirectedGraph<>();
+    Graph<Integer> expectedGraph = new UndirectedGraph<>();
     expectedGraph.addEdge(2, node5, node6);
     expectedGraph.addEdge(3, node1, node2);
     expectedGraph.addEdge(3, node3, node6);
     expectedGraph.addEdge(5, node1, node5);
-    expectedGraph.addEdge(7, node6, node4);
+    expectedGraph.addEdge(7, node4, node6);
     assertEquals(6, graph.getNumNodes());
     assertEquals(8, graph.getNumEdges());
     Mst<Integer> mst = new Mst<>(graph);

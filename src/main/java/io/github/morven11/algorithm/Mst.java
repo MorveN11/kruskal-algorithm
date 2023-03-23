@@ -96,11 +96,19 @@ public class Mst<T extends Comparable<T>> {
     }
   }
 
+  private Graph<T> convertToUndirectGraph(Graph<T> graphToConvert) {
+    Graph<T> undirectedGraph = new UndirectedGraph<>();
+    for (Edge<T> edge : graphToConvert.getAllEdges()) {
+      undirectedGraph.addEdge(edge.getWeight(), edge.getSource(), edge.getDestination());
+    }
+    return undirectedGraph;
+  }
+
   private Graph<T> kruskal(Graph<T> graphToConvert) {
-    Graph<T> mst = graphToConvert instanceof UndirectedGraph<T>
-            ? new UndirectedGraph<>() : new DirectedGraph<>();
-    Graph<T> cleanGraph = graphToConvert instanceof UndirectedGraph<T>
-            ? cleanGraph(graphToConvert) : graphToConvert;
+    Graph<T> mst = new UndirectedGraph<>();
+    graphToConvert = graphToConvert instanceof DirectedGraph<T>
+            ? convertToUndirectGraph(graphToConvert) : graphToConvert;
+    Graph<T> cleanGraph = cleanGraph(graphToConvert);
     subsets = fillSubset(cleanGraph);
     for (Edge<T> edge : cleanGraph.getAllEdges()) {
       Node<T> source = find(edge.getSource());
